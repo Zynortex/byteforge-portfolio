@@ -108,7 +108,7 @@ function CaseStudyContent({ project: p }: { project: FeaturedProject }) {
               >
                 {p.liveUrl && (
                   <Button href={p.liveUrl} external icon={ArrowUpRight} iconMotion="diagonal">
-                    View Live Product
+                    {p.liveLabel ?? 'View Live Product'}
                   </Button>
                 )}
                 <Button

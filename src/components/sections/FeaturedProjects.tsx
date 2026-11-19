@@ -84,7 +84,7 @@ function ProjectRow({ project: p, flip }: { project: FeaturedProject; flip: bool
         <Reveal delay={0.15} className="mt-9 flex flex-wrap gap-3">
           {p.liveUrl && (
             <Button href={p.liveUrl} external icon={ArrowUpRight} iconMotion="diagonal">
-              View Live Product
+              {p.liveLabel ?? 'View Live Product'}
             </Button>
           )}
           <Button to={`/projects/${p.slug}`} variant={p.liveUrl ? 'secondary' : 'primary'} icon={ArrowRight}>

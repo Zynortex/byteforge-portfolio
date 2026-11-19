@@ -93,6 +93,8 @@ export interface FeaturedProject {
   screenshots: Screenshot[];
   links: ProjectLink[];
   liveUrl?: string;
+  /** Button text for liveUrl. Defaults to "View Live Product". */
+  liveLabel?: string;
 }
 
 export interface EngineeringArea {

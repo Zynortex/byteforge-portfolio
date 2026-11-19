@@ -167,6 +167,7 @@ export const projects: FeaturedProject[] = [
     statusTone: 'live',
     visual: 'bytereport',
     liveUrl: 'https://bytereport-frontend.vercel.app/demo',
+    liveLabel: 'Open Live Demo',
 
     homePoints: [
       { title: 'CSV, Excel & PDF statement processing' },
@@ -294,7 +295,7 @@ export const projects: FeaturedProject[] = [
       'Ongoing interface and UX refinement',
     ],
     status: [
-      { label: 'Implemented', level: 'yes', value: 'Yes', note: 'Core functionality works locally' },
+      { label: 'Implemented', level: 'yes', value: 'Yes', note: 'Core functionality live in production' },
       { label: 'Tested', level: 'yes', value: '900+ tests', note: 'Automated suite and live checks' },
       { label: 'Publicly deployed', level: 'yes', value: 'Live', note: 'Public demo and sign-up' },
       { label: 'Customer use', level: 'no', value: 'Not yet', note: 'No customer usage claimed' },
