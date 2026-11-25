@@ -3,7 +3,7 @@
 export type StatusLevel = 'yes' | 'partial' | 'no' | 'unknown';
 
 export interface StatusItem {
-  label: 'Implemented' | 'Tested' | 'Publicly deployed' | 'Customer use';
+  label: 'Implemented' | 'Tested' | 'Publicly deployed';
   level: StatusLevel;
   value: string;
   note: string;
@@ -72,6 +72,8 @@ export interface FeaturedProject {
   /** Homepage summary points. Items with text render as a definition list. */
   homePoints: { title: string; text?: string }[];
   homeStack?: string[];
+  /** Real, verifiable numbers only (shown on the card). */
+  metrics?: { value: string; label: string }[];
 
   intro: string[];
   problem: string[];

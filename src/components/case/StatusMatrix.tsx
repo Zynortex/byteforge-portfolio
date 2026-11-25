@@ -9,11 +9,11 @@ const levels: Record<StatusLevel, { icon: typeof CircleCheck; cls: string }> = {
   unknown: { icon: CircleQuestionMark, cls: 'text-fg-dim' },
 };
 
-/** Separates what is implemented, tested, publicly deployed, and used by real customers. */
+/** Separates what is implemented, tested and publicly deployed. */
 export function StatusMatrix({ items }: { items: StatusItem[] }) {
   return (
     <Stagger
-      className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4"
+      className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3"
       gap={0.07}
     >
       {items.map((s) => {

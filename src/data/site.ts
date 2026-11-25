@@ -51,7 +51,7 @@ export const engineeringAreas: EngineeringArea[] = [
   {
     title: 'Backend Engineering',
     text: 'Python and FastAPI services that handle file ingestion, data processing, scoring pipelines and report generation.',
-    appliedIn: ['bytereport', 'bytecheck-uz'],
+    appliedIn: ['leadnova', 'bytereport', 'bytecheck-uz'],
     tools: ['Python', 'FastAPI', 'Supabase', 'ReportLab'],
     icon: 'server',
   },

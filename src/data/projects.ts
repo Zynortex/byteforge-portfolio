@@ -12,6 +12,15 @@ import { site } from './site';
  *                 the illustrative interface.
  */
 
+/** Screenshot in /public/projects/<slug>/<file>.webp (1600×1000). */
+const shot = (slug: string, file: string, alt: string, caption?: string) => ({
+  src: `/projects/${slug}/${file}.webp`,
+  alt,
+  caption,
+  width: 1600,
+  height: 1000,
+});
+
 const githubProfile = {
   label: 'GitHub profile',
   href: site.github,
@@ -26,133 +35,156 @@ export const projects: FeaturedProject[] = [
     index: '01',
     name: 'LeadNova',
     category: 'B2B Export Intelligence',
-    description:
-      'An AI-powered B2B intelligence platform designed to help exporters discover international market opportunities and potential buyers.',
-    statusLabel: 'Used by exporter clients · Runs locally',
-    statusTone: 'active',
+    description: 'AI-powered B2B buyer discovery for exporters from Uzbekistan. Piloted with 4 Uzbek exporters.',
+    statusLabel: 'Live demo · Piloted with 4 Uzbek exporters',
+    statusTone: 'live',
     visual: 'leadnova',
+    liveUrl: 'https://leadnova-production.up.railway.app',
+    liveLabel: 'Open Live Demo',
+    cover: shot(
+      'leadnova',
+      'results',
+      'LeadNova: saved real search for dried apricots to Germany, with ranked buyers and a company panel',
+    ),
 
     homePoints: [
-      {
-        title: 'Business problem',
-        text: 'Finding credible international buyers is slow, manual and scattered across sources.',
-      },
-      {
-        title: 'Data collection & processing',
-        text: 'Gathers market and buyer information for a target country and product, then structures it.',
-      },
-      {
-        title: 'AI-based analysis',
-        text: 'Evaluates potential buyers and market opportunities against the product and volume.',
-      },
-      {
-        title: 'Structured reporting',
-        text: 'Delivers the findings as a structured PDF intelligence report.',
-      },
-      {
-        title: 'Real business use',
-        text: 'Used by four exporter clients under a commission-based arrangement.',
-      },
+      { title: 'Finds importers and manufacturers that buy the product, by product and country' },
+      { title: 'AI reads company websites for proof of purchasing and scores each buyer 0–100 with a reliability label' },
+      { title: 'Contacts, a draft outreach email, PDF & Excel export' },
+      { title: '“Where to export”: importing countries from UN Comtrade data' },
+    ],
+    homeStack: ['FastAPI', 'React', 'Vite', 'Tailwind CSS', 'OpenAI API', 'Serper', 'UN Comtrade', 'Docker', 'Railway'],
+    metrics: [
+      { value: '400', label: 'automated tests' },
+      { value: '7', label: 'reference products in regression tests' },
+      { value: '~$0.01', label: 'AI cost per search' },
     ],
 
     intro: [
-      'LeadNova is an AI-powered B2B intelligence platform that helps exporters find international market opportunities and potential buyers. The exporter says what they sell, how much, and where they want to sell it. LeadNova researches the market and returns a structured intelligence report.',
-      'It is a working product that has been used in a real exporter business context. It currently runs locally and is not yet publicly deployed.',
+      'LeadNova finds B2B buyers abroad for exporters from Uzbekistan. Enter a product and a target country: it searches the web, has AI read company websites for evidence of purchasing, scores each company from 0 to 100 with a reliability label, and returns contacts, a draft outreach email and an Excel or PDF report.',
+      'A public demo is live. A saved real search (dried apricots → Germany) opens without an access code, and the “Where to export” view ranks importing countries using UN Comtrade data.',
     ],
     problem: [
-      'For an exporter, a new market starts with a simple question: who would buy this product, in this quantity, in this country? Answering it usually means hours of manual searching across scattered sources, then a subjective call on which leads are worth pursuing.',
-      'That costs time, misses opportunities, and leaves decisions resting on incomplete information.',
+      'For an exporter, a new market starts with a simple question: which companies in this country would actually buy this product? Answering it usually means hours of manual searching across scattered sources, then a subjective call on which leads are worth pursuing.',
+      'Bought contact databases go stale quickly and do not show who intends to buy. Exhibitions and trips are expensive and guarantee nothing.',
     ],
     concept: [
-      'LeadNova turns buyer discovery into a repeatable workflow. Three structured inputs (target country, product and quantity) drive a pipeline that collects information, processes it, applies AI-based analysis and produces a report.',
-      'The output is built for a business decision rather than a dashboard: a PDF the exporter can read, share and act on.',
+      'Live search instead of a database. LeadNova generates search queries for the product and market, searches the web, filters out marketplaces, catalogs and social networks, and only then sends the remaining company websites to AI.',
+      'Every score can be checked: ten weighted criteria with open weights, plus quotations from the company’s own website that support the verdict. Rejected companies stay in the report with a reason.',
     ],
     workflow: [
-      'Select target country',
-      'Specify exported product',
-      'Enter export quantity',
-      'Discover and evaluate potential buyers and market opportunities',
-      'Process and analyse collected information',
-      'Generate a structured PDF intelligence report',
+      'Product input: product, country, buyer type and approximate volume, or up to 50 rows from Excel / CSV',
+      'Search query generation for the product and market',
+      'Web search',
+      'Filtering: two filters before any AI call',
+      'AI company analysis: up to three pages of each website',
+      'Buyer report: scores, evidence, contacts, Excel and PDF',
     ],
     features: [
-      { title: 'Target market selection', text: 'The exporter chooses the country they want to sell into.' },
-      { title: 'Product & volume input', text: 'The exported product and quantity frame the whole search.' },
-      { title: 'Buyer & opportunity discovery', text: 'Finds and evaluates potential buyers and market openings.' },
-      { title: 'Data processing', text: 'Collected information is processed into a consistent structure.' },
-      { title: 'AI-based analysis', text: 'Potential buyers and opportunities are analysed for relevance.' },
-      { title: 'PDF intelligence report', text: 'Findings are compiled into a structured, shareable report.' },
+      { title: 'Buyer discovery', text: 'Importers, distributors and manufacturers that consume the product, by product and country.' },
+      { title: 'Live web search', text: 'Google results via Serper, not a purchased contact database.' },
+      { title: 'Filtering before AI', text: 'Marketplaces, catalogs and social networks are removed before any AI call.' },
+      { title: 'AI website analysis', text: 'AI reads up to three pages of each company’s website.' },
+      { title: 'Evidence-backed score', text: '0–100 from ten weighted criteria, with a reliability label and quotations from the site.' },
+      { title: 'Outreach email', text: 'A first email drafted from facts on the company’s website.' },
+      { title: 'Excel & PDF reports', text: 'A three-sheet Excel workbook and an A4 PDF report.' },
+      { title: 'Where to export', text: 'Top importing countries for the product, with growth, from UN Comtrade.' },
     ],
     architecture: {
-      caption:
-        'High-level pipeline as implemented. Component-level details (data sources, models, libraries) are still to be documented.',
+      caption: 'Logical architecture of the deployed system, organised by responsibility.',
       layers: [
+        { label: 'Client', nodes: [{ title: 'React + Vite + Tailwind', detail: 'Interface in RU / EN' }] },
+        { label: 'API', nodes: [{ title: 'FastAPI service', detail: 'Docker · Railway' }] },
         {
-          label: 'Input',
-          nodes: [{ title: 'Target country' }, { title: 'Exported product' }, { title: 'Export quantity' }],
+          label: 'Search',
+          nodes: [
+            { title: 'Query generation', detail: 'Per product and market' },
+            { title: 'Serper', detail: 'Google web search' },
+          ],
         },
         {
-          label: 'Collection',
-          nodes: [{ title: 'Buyer & market discovery', detail: 'Information gathering for the target market' }],
-        },
-        {
-          label: 'Processing',
-          nodes: [{ title: 'Data processing', detail: 'Collected information structured for analysis' }],
+          label: 'Filtering',
+          nodes: [{ title: 'Two filters before AI', detail: 'Marketplaces, catalogs, social networks removed' }],
         },
         {
           label: 'Analysis',
-          nodes: [{ title: 'AI-based evaluation', detail: 'Buyers and opportunities assessed' }],
+          nodes: [
+            { title: 'OpenAI API', detail: 'Reads up to 3 pages per website' },
+            { title: 'Buyer score', detail: '10 weighted criteria → 0–100' },
+          ],
         },
+        { label: 'Market data', nodes: [{ title: 'UN Comtrade', detail: '“Where to export”' }] },
         {
           label: 'Output',
-          nodes: [{ title: 'Structured PDF report', detail: 'Delivered to the exporter' }],
+          nodes: [
+            { title: 'Excel', detail: '3 sheets' },
+            { title: 'PDF report', detail: 'A4' },
+            { title: 'Outreach email' },
+          ],
         },
       ],
     },
-    stack: null,
-    stackPending: 'The LeadNova technology stack will be documented here.',
+    stack: [
+      { group: 'Backend', items: ['Python', 'FastAPI'] },
+      { group: 'Frontend', items: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'] },
+      { group: 'AI', items: ['OpenAI API'] },
+      { group: 'Data', items: ['Serper', 'UN Comtrade'] },
+      { group: 'Infrastructure', items: ['Docker', 'Railway'] },
+    ],
     process: [
       {
         title: 'Problem framing',
-        text: "Started from the exporter's real question: who are realistic buyers for this product, at this volume, in this market?",
+        text: "Started from the exporter's real question: which companies abroad actually buy this product, and how can I be sure before spending time on contacts?",
       },
       {
-        title: 'Workflow design',
-        text: 'Designed one linear pipeline from three structured inputs to a single report.',
+        title: 'Explainable scoring',
+        text: 'Designed the score as ten weighted criteria with open weights, backed by quotations, so every verdict can be checked.',
       },
       {
         title: 'AI-assisted implementation',
         text: 'Built with AI coding agents, including Claude Code, under my direction. I reviewed, tested and debugged the changes.',
       },
       {
-        title: 'Real-world use',
-        text: 'Put to work in real exporter engagements with four clients.',
+        title: 'Testing & deployment',
+        text: 'Covered with 400 automated tests and regression tests on 7 reference products, then deployed with Docker on Railway.',
       },
     ],
     testing: {
       points: [
-        'Used end to end in real exporter engagements with four clients.',
-        'Runs locally. Not yet publicly deployed.',
+        '400 automated tests.',
+        'Regression tests on 7 reference products.',
+        'Measured AI cost: about $0.01 per search.',
+        'Publicly deployed as a live demo and piloted with 4 Uzbek exporters.',
       ],
-      pending: 'Test approach and validation criteria will be documented here.',
     },
     contribution: [
       'Product concept and direction',
       'Requirements drawn from exporter workflows',
-      'Pipeline and architecture design',
+      'Pipeline, scoring model and architecture design',
       'Implementation guidance for AI coding agents',
       'Code review, testing and debugging',
-      'Delivery to exporter clients under a commission-based arrangement',
+      'Deployment: Docker on Railway',
     ],
     status: [
-      { label: 'Implemented', level: 'yes', value: 'Yes', note: 'Full workflow is functional' },
-      { label: 'Tested', level: 'yes', value: 'In real use', note: 'Used in live exporter engagements' },
-      { label: 'Publicly deployed', level: 'no', value: 'Not yet', note: 'Runs locally' },
-      { label: 'Customer use', level: 'yes', value: '4 exporter clients', note: 'Commission-based arrangement' },
+      { label: 'Implemented', level: 'yes', value: 'Yes', note: 'Full pipeline works in production' },
+      { label: 'Tested', level: 'yes', value: '400 tests', note: 'Plus regression set of 7 products' },
+      { label: 'Publicly deployed', level: 'yes', value: 'Live', note: 'Public demo on Railway' },
     ],
     video: { url: null, title: 'LeadNova product walkthrough' },
-    screenshots: [],
-    links: [githubProfile],
+    screenshots: [
+      shot('leadnova', 'landing', 'LeadNova landing page', 'Landing page'),
+      shot('leadnova', 'results', 'Ranked buyers for dried apricots to Germany', 'Saved real search: dried apricots → Germany'),
+      shot('leadnova', 'company', 'Company panel with AI verdict and evidence quotes', 'Company panel: AI verdict and evidence quoted from the website'),
+      shot('leadnova', 'where-to-export', 'Where to export: importing countries from UN Comtrade', '“Where to export”: importing countries from UN Comtrade'),
+    ],
+    links: [
+      {
+        label: 'Live demo',
+        href: 'https://leadnova-production.up.railway.app',
+        kind: 'live',
+        description: 'leadnova-production.up.railway.app',
+      },
+    ],
   },
 
   /* ---------------------------------------------------------------- */
@@ -180,6 +212,10 @@ export const projects: FeaturedProject[] = [
       { title: 'PDF reports & Excel export' },
     ],
     homeStack: ['Python', 'FastAPI', 'React', 'TypeScript', 'Supabase', 'pandas', 'OpenAI API'],
+    metrics: [
+      { value: '900+', label: 'automated tests' },
+      { value: '~$0.03', label: 'AI cost per report' },
+    ],
 
     intro: [
       'ByteReport turns raw bank statements into structured financial insight. Upload a statement as CSV, Excel or PDF, and ByteReport produces calculations, a Financial Health Score, forecasts, anomaly flags and an AI-written interpretation, all exportable as PDF or Excel.',
@@ -282,7 +318,7 @@ export const projects: FeaturedProject[] = [
         'Found and fixed two event-loop blocking bugs (the AI call and PDF parsing) that froze the whole API, each proven with a before/after health-check test.',
         'Cut peak memory on a 150-page PDF statement from ~700 MB to ~140 MB so it runs on a 512 MB free instance.',
         'Measured cost per AI report: about $0.03.',
-        'Publicly deployed. No customer usage is claimed.',
+        'Publicly deployed.',
       ],
     },
     contribution: [
@@ -298,7 +334,6 @@ export const projects: FeaturedProject[] = [
       { label: 'Implemented', level: 'yes', value: 'Yes', note: 'Core functionality live in production' },
       { label: 'Tested', level: 'yes', value: '900+ tests', note: 'Automated suite and live checks' },
       { label: 'Publicly deployed', level: 'yes', value: 'Live', note: 'Public demo and sign-up' },
-      { label: 'Customer use', level: 'no', value: 'Not yet', note: 'No customer usage claimed' },
     ],
     video: { url: null, title: 'ByteReport product walkthrough' },
     screenshots: [],
@@ -433,7 +468,6 @@ export const projects: FeaturedProject[] = [
       { label: 'Implemented', level: 'yes', value: 'Yes', note: 'Full feature set' },
       { label: 'Tested', level: 'yes', value: 'Yes', note: 'Running in live deployment' },
       { label: 'Publicly deployed', level: 'yes', value: 'Live', note: 'Public web application' },
-      { label: 'Customer use', level: 'unknown', value: 'Not claimed', note: 'No usage figures stated' },
     ],
     video: { url: null, title: 'ByteCheck UZ product walkthrough' },
     screenshots: [],

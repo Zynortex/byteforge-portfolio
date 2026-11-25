@@ -19,7 +19,7 @@ export function FeaturedProjects() {
               Three products. <em>Real problems.</em>
             </>
           }
-          description="Each product started from a specific business workflow and was built into working software. Status is shown as it is: live, in client use, or running locally."
+          description="Each product started from a specific business workflow and was built into working software. All three are live and open to try."
         />
 
         <div className="mt-20 space-y-28 md:mt-28 md:space-y-40">
@@ -69,6 +69,22 @@ function ProjectRow({ project: p, flip }: { project: FeaturedProject; flip: bool
               </StaggerItem>
             ))}
           </Stagger>
+        )}
+
+        {p.metrics && p.metrics.length > 0 && (
+          <Reveal delay={0.05} className="mt-7">
+            <dl
+              className="grid gap-px overflow-hidden rounded-xl border border-line bg-line"
+              style={{ gridTemplateColumns: `repeat(${p.metrics.length}, minmax(0, 1fr))` }}
+            >
+              {p.metrics.map((m) => (
+                <div key={m.label} className="flex flex-col-reverse justify-end bg-ink-900 px-3.5 py-3">
+                  <dt className="mt-1 text-[0.72rem] leading-snug text-fg-muted">{m.label}</dt>
+                  <dd className="font-mono text-lg font-medium tracking-tight text-accent-soft">{m.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
         )}
 
         {p.homeStack && (
