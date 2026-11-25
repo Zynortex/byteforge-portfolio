@@ -197,9 +197,16 @@ export const projects: FeaturedProject[] = [
       'An AI-powered financial intelligence platform that transforms bank statements into structured financial insights and actionable reports.',
     statusLabel: 'Live demo',
     statusTone: 'live',
-    visual: 'bytereport',
     liveUrl: 'https://bytereport-frontend.vercel.app/demo',
     liveLabel: 'Open Live Demo',
+    cover: {
+      src: '/projects/bytereport/report.webp',
+      alt: 'ByteReport: sample report for Kontur furniture workshop — Financial Health Score 61, executive summary and weekly cash flow',
+      width: 1600,
+      height: 1100,
+      mobile: { src: '/projects/bytereport/report-mobile.webp', width: 800, height: 840 },
+    },
+    coverCaption: 'Real interface · sample data',
 
     homePoints: [
       { title: 'CSV, Excel & PDF statement processing' },

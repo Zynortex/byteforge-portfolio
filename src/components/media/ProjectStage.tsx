@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import type { FeaturedProject } from '../../types';
+import type { FeaturedProject, Screenshot } from '../../types';
 import { EASE } from '../../lib/motion';
 import { ProductVisual } from '../visuals/ProductVisual';
 import { VideoDemo } from './VideoDemo';
@@ -72,18 +72,10 @@ export function ProjectStage({ project, className = '' }: { project: FeaturedPro
             >
               {tab === 'interface' ? (
                 project.cover ? (
-                  <img
-                    src={project.cover.src}
-                    alt={project.cover.alt}
-                    width={project.cover.width}
-                    height={project.cover.height}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-full w-full object-cover object-top"
-                  />
-                ) : (
+                  <CoverImage cover={project.cover} />
+                ) : project.visual ? (
                   <ProductVisual kind={project.visual} />
-                )
+                ) : null
               ) : (
                 <VideoDemo video={project.video} projectName={project.name} fit="fill" />
               )}
@@ -91,11 +83,39 @@ export function ProjectStage({ project, className = '' }: { project: FeaturedPro
           </AnimatePresence>
         </div>
       </div>
-      {tab === 'interface' && !project.cover && (
+      {tab === 'interface' && (project.cover ? project.coverCaption : 'Illustrative interface · Not real data') && (
         <p className="mt-3 text-right font-mono text-[0.62rem] uppercase tracking-[0.16em] text-fg-dim">
-          Illustrative interface · Not real data
+          {project.cover ? project.coverCaption : 'Illustrative interface · Not real data'}
         </p>
       )}
     </div>
+  );
+}
+
+/** Real screenshot in the window. A `mobile` frame, when given, replaces it below `sm` (640px),
+ * where the window switches to its narrow aspect ratio. */
+function CoverImage({ cover }: { cover: Screenshot }) {
+  const img = (
+    <img
+      src={cover.src}
+      alt={cover.alt}
+      width={cover.width}
+      height={cover.height}
+      loading="lazy"
+      decoding="async"
+      className="h-full w-full object-cover object-top"
+    />
+  );
+  if (!cover.mobile) return img;
+  return (
+    <picture className="block h-full w-full">
+      <source
+        media="(max-width: 639px)"
+        srcSet={cover.mobile.src}
+        width={cover.mobile.width}
+        height={cover.mobile.height}
+      />
+      {img}
+    </picture>
   );
 }

@@ -30,6 +30,8 @@ export interface Screenshot {
   /** Intrinsic size — prevents layout shift. */
   width: number;
   height: number;
+  /** Optional frame for narrow screens (below `sm`, 640px), e.g. the mobile layout of the app. */
+  mobile?: { src: string; width: number; height: number };
 }
 
 export interface ArchitectureNode {
@@ -54,7 +56,7 @@ export interface TitledText {
   text: string;
 }
 
-export type ProjectVisual = 'leadnova' | 'bytereport' | 'bytecheck';
+export type ProjectVisual = 'leadnova' | 'bytecheck';
 
 export interface FeaturedProject {
   slug: string;
@@ -65,9 +67,12 @@ export interface FeaturedProject {
   /** Short, honest status shown on cards. */
   statusLabel: string;
   statusTone: 'live' | 'active' | 'local';
-  visual: ProjectVisual;
+  /** Illustrative interface, used only when there is no real `cover` screenshot. */
+  visual?: ProjectVisual;
   /** Optional real screenshot used instead of the illustrative interface on cards. */
   cover?: Screenshot;
+  /** Small line under the window when the cover is shown, e.g. "Real interface · sample data". */
+  coverCaption?: string;
 
   /** Homepage summary points. Items with text render as a definition list. */
   homePoints: { title: string; text?: string }[];
